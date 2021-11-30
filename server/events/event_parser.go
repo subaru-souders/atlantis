@@ -661,6 +661,11 @@ func (e *EventParser) ParseBitbucketServerPullCommentEvent(body []byte) (pull mo
 	}
 	pull, baseRepo, headRepo, user, err = e.parseCommonBitbucketServerEventData(event.CommonEventData)
 	comment = *event.Comment.Text
+	
+	// Return the author of the comment rather than the author of the PR
+	user = models.User{
+		Username: *event.Comment.CommentActor.Username,
+	}
 	return
 }
 
