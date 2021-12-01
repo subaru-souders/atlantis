@@ -663,8 +663,13 @@ func (e *EventParser) ParseBitbucketServerPullCommentEvent(body []byte) (pull mo
 	comment = *event.Comment.Text
 	
 	// Return the author of the comment rather than the author of the PR
+	//user = models.User{
+	//	Username: *event.Comment.CommentActor.Username,
+	//}
+
+	// Force inject service account username instead of comment author
 	user = models.User{
-		Username: *event.Comment.CommentActor.Username,
+		Username: "ttfs",
 	}
 	return
 }
