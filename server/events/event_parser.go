@@ -661,13 +661,15 @@ func (e *EventParser) ParseBitbucketServerPullCommentEvent(body []byte) (pull mo
 	}
 	pull, baseRepo, headRepo, user, err = e.parseCommonBitbucketServerEventData(event.CommonEventData)
 	comment = *event.Comment.Text
-	
-	// Return the author of the comment rather than the author of the PR
+
+	// By default, Atlantis uses the author of the PR for permission checking
+
+	// This variant returns the author of the comment rather than the author of the PR
 	//user = models.User{
 	//	Username: *event.Comment.CommentActor.Username,
 	//}
 
-	// Force inject service account username instead of comment author
+	// This variant forcefully injects the service account username instead of comment author
 	user = models.User{
 		Username: "ttfs",
 	}
