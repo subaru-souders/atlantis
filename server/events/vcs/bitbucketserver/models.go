@@ -57,7 +57,6 @@ type Actor struct {
 
 type Comment struct {
 	Text *string `json:"text,omitempty" validate:"required"`
-	CommentActor *Actor `json:"actor,omitempty" validate:"required"`
 }
 
 type Changes struct {
